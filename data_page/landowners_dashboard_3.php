@@ -42,20 +42,6 @@ if (mysqli_num_rows($sql) > 0) {
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
     <body>
-        <div class="navigation_bar"></div>                      
-        <div class="navbar_container" id="navbar">              
-            <div class="sea_container">                         
-                <div>                                           
-                <a href="..\data_page\ResiHive.php"><img src="..\data_image\LOGO.png" class="logo" alt="logo"></a>
-                </div>
-                <div class="search_container">
-                <form action="/action_page.php">
-                  <input type="text" placeholder="Search.." name="search">
-                </form>
-                </div>
-            </div>
-        </div>
-
         <section class="main">
             <div class="wrapper" id="container">
                 <header>
