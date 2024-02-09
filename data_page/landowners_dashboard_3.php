@@ -45,51 +45,56 @@ if (mysqli_num_rows($sql) > 0) {
         <section class="main">
             <div class="wrapper" id="container">
                 <header>
+
                     <div class="title">
+                        <a href="../data_page/landowners_dashboard_5.php" class="back-icon">
+                            <img src="../data_image/buutonlogo.png" alt="Back">
+                        </a>
                         <h1>Chat</h1>
                     </div>
+                    
                     <div class="content">
 
-                    <?php
-                    include_once "../database/database.php";
+                        <?php
+                        include_once "../database/database.php";
 
-                    // Fetch userid from the URL parameters
-                    $userid = isset($_GET['userid']) ? $_GET['userid'] : null;
+                        // Fetch userid from the URL parameters
+                        $userid = isset($_GET['userid']) ? $_GET['userid'] : null;
 
-                    if (!$userid) {
-                        // Handle the case where no userid is provided in the URL
-                        echo "No user found";
-                        exit; // You can redirect or display an error message as needed
-                    }
+                        if (!$userid) {
+                            // Handle the case where no userid is provided in the URL
+                            echo "No user found";
+                            exit; // You can redirect or display an error message as needed
+                        }
 
-                    // Fetch data from rental_options and tbl_renters_account using a JOIN statement
-                    $sql = mysqli_query($conn, "SELECT ro.renter_user_id, ra.f_name, ra.s_name, ra.profile_img
-                                                FROM rental_options ro
-                                                JOIN tbl_renters_account ra ON ro.renter_user_id = ra.userid 
-                                                WHERE ro.renter_user_id = $userid");
+                        // Fetch data from rental_options and tbl_renters_account using a JOIN statement
+                        $sql = mysqli_query($conn, "SELECT ro.renter_user_id, ra.f_name, ra.s_name, ra.profile_img
+                                                    FROM rental_options ro
+                                                    JOIN tbl_renters_account ra ON ro.renter_user_id = ra.userid 
+                                                    WHERE ro.renter_user_id = $userid");
 
-                    if (mysqli_num_rows($sql) > 0) {
-                        $row = mysqli_fetch_assoc($sql);
-                    } else {
-                        // Handle the case where no rows are returned
-                        $row = array(); // Initialize $row as an empty array
-                    }
-                    ?>
-                        <img src="..\data_style\assets\profile\<?php echo $row['profile_img']; ?>" alt="Profile Image">
-                        <div class="details">
-                            <?php if (!empty($row)): ?>
-                                <span><a><?php echo $row['f_name']. " " . $row['s_name'] ?></a></span>
-                                <!-- <p><?php echo $row['msg_status']; ?></p> -->
-                                <div class="active_user">
-                                    <div class="status-dot"><i class="fa-solid fa-circle"></i></div>
-                                    <p style="color:white"> Active Now</p>
-                                </div>
-                            <?php else: ?>
-                                <p style="color:white">No Landowner</p>
-                            <?php endif; ?>
-                        </div>
+                        if (mysqli_num_rows($sql) > 0) {
+                            $row = mysqli_fetch_assoc($sql);
+                        } else {
+                            // Handle the case where no rows are returned
+                            $row = array(); // Initialize $row as an empty array
+                        }
+                        ?>
+                            <img src="..\data_style\assets\profile\<?php echo $row['profile_img']; ?>" alt="Profile Image">
+                            <div class="details">
+                                <?php if (!empty($row)): ?>
+                                    <span><a><?php echo $row['f_name']. " " . $row['s_name'] ?></a></span>
+                                    <!-- <p><?php echo $row['msg_status']; ?></p> -->
+                                    <div class="active_user">
+                                        <div class="status-dot"><i class="fa-solid fa-circle"></i></div>
+                                        <p style="color:white"> Active Now</p>
+                                    </div>
+                                <?php else: ?>
+                                    <p style="color:white">No Landowner</p>
+                                <?php endif; ?>
+                            </div>
 
-                        </div>
+                    </div>
                 </header>
                     <section class="users">
                     <div class="search">

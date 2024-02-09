@@ -928,8 +928,46 @@ header {
   color: #888;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+}
 
+.back-icon img {
+  width: 100px; 
+  height: 100px; 
+}
 
+.title h1 {
+  margin-left: 100px; 
+}
+
+body {
+  height: 125vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+/* Additional styles as needed */
+.main {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  flex: 1;
+  overflow: auto;
+  padding-bottom: 60px; /* Adjust as needed for the footer */
+}
+
+.footer {
+  height: 60px; /* Adjust as needed */
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 20px;
+}
 
 
 

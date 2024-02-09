@@ -1,6 +1,6 @@
 <?php
 session_start();
-print_r($_SESSION);
+// print_r($_SESSION);
 require_once '../database/database.php';
 
 // Check if the user is already logged in
@@ -61,6 +61,12 @@ if ($resultRentalOptions->num_rows > 0) {
     $rentalOptionsData = $resultRentalOptions->fetch_assoc();
     $ownerUserId = $rentalOptionsData['owner_user_id'];
 
+    // Debugging: Print the content of $_SESSION['rentalOptionsData']
+        // echo '<pre>';
+        // print_r($_SESSION['rentalOptionsData']);
+        // echo '</pre>';
+
+
     // Save rentalOptionsData in the session
     $_SESSION['rentalOptionsData'] = $rentalOptionsData;
 } else {
@@ -102,11 +108,10 @@ if ($resultRentalOptions->num_rows > 0) {
                             include_once "../database/database.php";
 
                             // Fetch data from rental_options, tbl_landowner_account, and house_rentals using JOIN statements
-                            $sql = mysqli_query($conn, "SELECT ro.owner_user_id, la.f_name, la.s_name, hr.house_id  
-                                FROM rental_options ro
-                                JOIN tbl_landowner_account la ON ro.owner_user_id = la.userid 
-                                JOIN house_rentals hr ON ro.house_id = hr.house_id
-                                WHERE ro.owner_user_id = '{$_SESSION['tenant']['userid']}'");
+                            $sql = mysqli_query($conn, "SELECT ro.owner_user_id, hr.house_name, hr.house_image
+                                                        FROM house_rentals hr 
+                                                        JOIN rental_options ro ON ro.owner_user_id = hr.landowner_userid
+                                                        WHERE ro.owner_user_id = $userid");
 
                             if ($sql && mysqli_num_rows($sql) > 0) {
                                 $row = mysqli_fetch_assoc($sql);
@@ -117,17 +122,17 @@ if ($resultRentalOptions->num_rows > 0) {
 
                         ?>
                         <img src="..\data_image\favicon.png" alt="logo">
-                        <div class="details">
-                            <!-- <?php if (!empty($row)): ?>
-                                <span><a><?php echo $row['f_name']. " " . $row['s_name'] ?></a></span> -->
-                                <!-- <p><?php echo $row['msg_status']; ?></p> -->
-                                <!-- <div class="active_user">
+                        <div class="details">   
+                        <?php if (!empty($row)): ?>
+                                <span><a><?php echo $row['house_name']?></a></span>
+                                <p><?php echo $row['msg_status']; ?></p>
+                                <div class="active_user">
                                     <div class="status-dot"><i class="fa-solid fa-circle"></i></div>
                                     <p style="color:white"> Active Now</p>
-                                </div> -->
-                            <!-- <?php else: ?> -->
-                                <p style="color:white">Landowner</p>
-                            <!-- <?php endif; ?> -->
+                                </div> 
+                            <?php else: ?>
+                                <p style="color:white">loobLandowner</p>
+                            <?php endif; ?>
                         </div>
 
                      </div>

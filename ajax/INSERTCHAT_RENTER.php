@@ -17,8 +17,8 @@ if (empty($chatmsg)) {
         echo "database";
     } else {
         $renterID = getLandownerID($email);
-        $stmt  = $db->prepare("INSERT INTO chats(chat,rent_id,land_id,sender_id,receiver_id) VALUES(?,?,?,?,?)");
-        $stmt->bind_param("sssss", $chatmsg, $renterID, $land_id, $renterID, $land_id);
+        $stmt  = $db->prepare("INSERT INTO chats(user_item,chat,rent_id,land_id,sender_id,receiver_id) VALUES(?,?,?,?,?,?)");
+        $stmt->bind_param("ssssss", $renterID, $chatmsg, $renterID, $land_id, $renterID, $land_id);
         $stmt->execute();
         $stmt->close();
         echo "success";
